@@ -1,0 +1,15 @@
+name: "Register an event on PipeCD"
+on:
+  push:
+    branches:
+    - main
+jobs:
+  register-event:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: pipe-cd/actions-event-register@v1
+      with:
+        api-address: ${{ secrets.PIPECD_API_ADDRESS }}
+        api-key: ${{ secrets.PIPECD_API_KEY }}
+        event-name: image-update
+        data: ${{ github.sha }}
